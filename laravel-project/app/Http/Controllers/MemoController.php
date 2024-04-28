@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MemoRequest;
+use App\Models\Memo;
 
 class MemoController extends Controller
 {
@@ -13,7 +15,8 @@ class MemoController extends Controller
      */
     public function top()
     {
-        return view('memo.top');
+        $memos = Memo::getAllOrderByCreated();
+        return view('memo.top', compact('memos'));
     }
 
     /**
@@ -32,9 +35,11 @@ class MemoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemoRequest $request)
     {
-        //
+        $data = $request->validated();
+        $result = Memo::create($data);
+        return redirect()->route('memo.top');
     }
 
     /**
@@ -43,9 +48,10 @@ class MemoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('memo.edit');
+        $memo = Memo::find($id);
+        return view('memo.edit', compact('memo'));
     }
 
     /**
@@ -55,9 +61,11 @@ class MemoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemoRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $result = Memo::find($id)->update($data);
+        return redirect()->route('memo.top');
     }
 
     /**
@@ -68,6 +76,12 @@ class MemoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = Memo::find($id)->delete();
+        return redirect()->route('memo.top');
+    }
+
+    public function verror()
+    {
+        return view('memo.verror');
     }
 }

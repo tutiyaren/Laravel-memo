@@ -16,11 +16,17 @@
         @csrf
         <div class="form-ttl">
             <label for="title" class="memo-ttl">title</label>
-            <input type="text" name="title" id="title" placeholder="タイトル" class="input-ttl" value="">
+            <input type="text" name="title" id="title" placeholder="タイトル" class="input-ttl" value="{{ old('title') }}">
+            @error('title')
+            <p class="error">{{ $errors->first('title') }}</p>
+            @enderror
         </div>
         <div class="form-content">
             <label for="content" class="memo-content">本文</label>
-            <input type="text" name="content" id="content" placeholder="本文" class="input-content" value="">
+            <input type="text" name="content" id="content" placeholder="本文" class="input-content" value="{{ old('content') }}">
+            @error('content')
+            <p class="error">{{ $errors->first('content') }}</p>
+            @enderror
         </div>
         <div class="submit">
             <button type="submit" class="submit-button">送信</button>
