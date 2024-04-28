@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MemoController::class, 'top'])->name('memo.top');
+Route::get('/create', [MemoController::class, 'create'])->name('memo.create');
+Route::post('/store', [MemoController::class, 'store'])->name('memo.store');
+Route::get('/edit', [MemoController::class, 'edit'])->name('memo.edit');
+Route::put('/update/{id}', [MemoController::class, 'update'])->name('memo.update');
+Route::delete('/destroy', [MemoController::class, 'destroy'])->name('memo.destroy');
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });

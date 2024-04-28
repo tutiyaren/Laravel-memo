@@ -1,0 +1,79 @@
+.main {
+    width: 80%;
+    margin: 4% auto 0;
+}
+.search-form__input {
+    padding: 1%;
+    font-size: 0.8rem;
+    width: 30%;
+}
+.search-form__button {
+    font-size: 1rem;
+    color: white;
+    background-color: blue;
+    border: none;
+    margin-left: 3%;
+    padding: 1% 2%;
+    font-weight: bold;
+    border-radius: 10%;
+    cursor: pointer;
+}
+.link-create {
+    text-decoration: none;
+    color: blue;
+}
+.sort {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: end;
+    gap: 3%;
+    margin-bottom: 3%;
+}
+.sort-new__button,
+.sort-old__button {
+    border: none;
+    background-color: white;
+    color: blue;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+.table-th {
+    background-color: rgb(246, 246, 246);
+}
+.table-td {
+    background-color: rgb(215, 215, 215);
+    text-align: center;
+    padding: 2% 0;
+}
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    width: 25%;
+}
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 30%;
+}
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 25%;
+}
+.table th:nth-child(4),
+.table td:nth-child(4),
+.table th:nth-child(5),
+.table td:nth-child(5) {
+    width: 10%;
+}
+.edit-link {
+    text-decoration: none;
+    color: blue;
+}
+.delete-button {
+    border: none;
+    background-color: rgb(215, 215, 215);
+    color: red;
+}
