@@ -19,9 +19,10 @@
     <div class="ttl">
         <h1 class="ttl-top">メモ一覧</h1>
     </div>
-    <!-- メモ追加リンク -->
+    <!-- リンク -->
     <div class="link">
         <a href="{{ route('memo.create') }}" class="link-create">メモを追加</a>
+        <a href="{{ route('category.index') }}" class="link-category">カテゴリ一覧へ</a>
     </div>
     <!-- ソート -->
     <div class="sort">

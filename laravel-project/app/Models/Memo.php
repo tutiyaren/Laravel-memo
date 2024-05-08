@@ -23,6 +23,11 @@ class Memo extends Model
         'content'
     ];
 
+    public function memo_categories()
+    {
+        return $this->hasMany(Memo_Category::class, 'category_id');
+    }
+
     // id
     public function setIdAttribute($value)
     {
@@ -62,11 +67,11 @@ class Memo extends Model
 
     public static function getAllAscCreated()
     {
-        return self::orderBy('created_at', 'asc')->get();
+        return self::orderBy('created_at', 'desc')->get();
     }
 
     public static function getAllDescCreated()
     {
-        return self::orderBy('created_at', 'desc')->get();
+        return self::orderBy('created_at', 'asc')->get();
     }
 }

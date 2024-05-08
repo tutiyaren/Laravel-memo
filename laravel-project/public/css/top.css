@@ -21,6 +21,11 @@
 .link-create {
     text-decoration: none;
     color: blue;
+    margin-right: 5%;
+}
+.link-category {
+    text-decoration: none;
+    color: rgb(70, 70, 252);
 }
 .sort {
     display: grid;
