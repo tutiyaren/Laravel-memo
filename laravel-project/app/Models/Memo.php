@@ -25,7 +25,7 @@ class Memo extends Model
 
     public function memo_categories()
     {
-        return $this->hasMany(Memo_Category::class, 'category_id');
+        return $this->hasMany(Memo_Category::class, 'memo_id');
     }
 
     // id

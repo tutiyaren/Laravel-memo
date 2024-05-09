@@ -1,6 +1,7 @@
 <?php
 namespace App\UseCase;
 use App\Models\Memo;
+use App\Models\Memo_Category;
 use Illuminate\Http\Request;
 
 class CreateMemoUseCase
@@ -8,6 +9,12 @@ class CreateMemoUseCase
     public function __invoke(Request $request)
     {
         $data = $request->validated();
-        Memo::create($data);
+        $category_id = $request->input('name');
+        $memo = Memo::create($data);
+        $memo_id = $memo->id;
+        Memo_Category::create([
+            'category_id' => $category_id,
+            'memo_id' => $memo_id,
+        ]);
     }
 }

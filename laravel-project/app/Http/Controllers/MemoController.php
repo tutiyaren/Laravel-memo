@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\MemoRequest;
 use App\Models\Memo;
+use App\Models\Category;
 use App\UseCase\CreateMemoUseCase;
 use App\UseCase\DeleteMemoUseCase;
 use App\UseCase\EditMemoUseCase;
@@ -45,7 +46,8 @@ class MemoController extends Controller
      */
     public function create()
     {
-        return view('memo.create');
+        $categories = Category::get();
+        return view('memo.create', compact('categories'));
     }
 
     /**
@@ -68,8 +70,8 @@ class MemoController extends Controller
      */
     public function edit($id, GetEditMemoUseCase $case)
     {
-        $memo = $case($id);
-        return view('memo.edit', compact('memo'));
+        list($memo, $categories) = $case($id);
+        return view('memo.edit', compact('memo', 'categories'));
     }
 
     /**

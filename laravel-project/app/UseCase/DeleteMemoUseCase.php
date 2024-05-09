@@ -6,6 +6,8 @@ class DeleteMemoUseCase
 {
     public function __invoke($id)
     {
-        Memo::find($id)->delete();
+        $memo = Memo::find($id);
+        $memo->memo_categories()->delete();
+        $memo->delete(); 
     }
 }
