@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use App\UseCase\Category\CreateCategoryUseCase;
+use App\UseCase\Category\EditCategoryUseCase;
+use App\UseCase\Category\DeleteCategoryUseCase;
+use App\UseCase\Category\GetEditCategoryUseCase;
+use App\UseCase\Category\GetCategoryUseCase;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(GetCategoryUseCase $case)
     {
-        $categories = Category::get();
+        $categories = $case();
         return view('category.index', compact('categories'));
     }
 
@@ -19,34 +22,27 @@ class CategoryController extends Controller
         return view('category.create');
     }
 
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request, CreateCategoryUseCase $case)
     {
-        $name = $request->input('name');
-        $category = new Category();
-        $category->name = $name;
-        $category->save();
-
+        $case($request);
         return redirect()->route('category.index');
     }
 
-    public function edit($id)
+    public function edit($id, GetEditCategoryUseCase $case)
     {
-        $category = Category::find($id);
+        $category = $case($id);
         return view('category/edit', compact('category'));
     }
 
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, $id, EditCategoryUseCase $case)
     {
-        $name = $request->input('name');
-        $category = Category::find($id);
-        $category->update(['name' => $name]);
+        $case($request, $id);
         return redirect()->route('category.index');
     }
 
-    public function destroy($id)
+    public function destroy($id, DeleteCategoryUseCase $case)
     {
-        $category = Category::find($id);
-        $category->delete();
+        $case($id);
         return redirect()->route('category.index');
     }
 }

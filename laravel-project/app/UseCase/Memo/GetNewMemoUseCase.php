@@ -1,12 +1,12 @@
 <?php
-namespace App\UseCase;
+namespace App\UseCase\Memo;
 use App\Models\Memo;
 use Illuminate\Http\Request;
 
-class GetOldMemoUseCase
+class GetNewMemoUseCase
 {
     public function __invoke(Request $request)
     {
-        return Memo::getAllDescCreated();
+        return Memo::getAllAscCreated();
     }
 }

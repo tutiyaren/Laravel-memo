@@ -1,5 +1,5 @@
 <?php
-namespace App\UseCase;
+namespace App\UseCase\Memo;
 use App\Models\Memo;
 use App\Models\Memo_Category;
 use Illuminate\Http\Request;

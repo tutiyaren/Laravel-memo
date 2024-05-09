@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\MemoRequest;
-use App\Models\Memo;
-use App\Models\Category;
-use App\UseCase\CreateMemoUseCase;
-use App\UseCase\DeleteMemoUseCase;
-use App\UseCase\EditMemoUseCase;
-use App\UseCase\GetEditMemoUseCase;
-use App\UseCase\GetMemoUseCase;
-use App\UseCase\GetNewMemoUseCase;
-use App\UseCase\GetOldMemoUseCase;
+use App\UseCase\Memo\CreateMemoUseCase;
+use App\UseCase\Memo\DeleteMemoUseCase;
+use App\UseCase\Memo\EditMemoUseCase;
+use App\UseCase\Memo\GetEditMemoUseCase;
+use App\UseCase\Memo\GetMemoUseCase;
+use App\UseCase\Memo\GetNewMemoUseCase;
+use App\UseCase\Memo\GetOldMemoUseCase;
+use App\UseCase\Memo\GetCreateMemoUseCase;
 
 class MemoController extends Controller
 {
@@ -44,9 +43,9 @@ class MemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(GetCreateMemoUseCase $case)
     {
-        $categories = Category::get();
+        $categories = $case();
         return view('memo.create', compact('categories'));
     }
 

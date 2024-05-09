@@ -1,5 +1,5 @@
 <?php
-namespace App\UseCase;
+namespace App\UseCase\Memo;
 use App\Models\Memo;
 use App\Models\Memo_Category;
 use Illuminate\Http\Request;
@@ -23,5 +23,3 @@ class EditMemoUseCase
         ]);
     }
 }
-
-// 元からあったデータの更新からで、categoryないから、挿入する。
