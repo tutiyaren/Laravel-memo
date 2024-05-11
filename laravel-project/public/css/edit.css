@@ -1,0 +1,29 @@
+.main {
+    width: 80%;
+    margin: 4% auto 0;
+    text-align: center;
+}
+.form-ttl {
+    margin-top: 7%;
+    margin-bottom: 4%;
+}
+.input-ttl,
+.input-content {
+    padding: 1%;
+    width: 50%;
+    font-size: 1rem;
+}
+.submit {
+    margin-top: 5%;
+}
+.submit-button {
+    font-size: 1rem;
+    color: white;
+    background-color: blue;
+    border: none;
+    margin-left: 3%;
+    padding: 1% 2%;
+    font-weight: bold;
+    border-radius: 10%;
+    cursor: pointer;
+}
