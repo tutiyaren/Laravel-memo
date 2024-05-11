@@ -45,22 +45,24 @@
             <th class="table-th">削除</th>
         </tr>
         <!-- テーブル内容 -->
+        @foreach ($memos as $memo)
         <tr class="table-tr">
-            <td class="table-td">タイトル</td>
-            <td class="table-td">内容</td>
-            <td class="table-td">2024-03-15 20:38:58</td>
+            <td class="table-td">{{ $memo->title }}</td>
+            <td class="table-td">{{ $memo->content }}</td>
+            <td class="table-td">{{ $memo->created_at }}</td>
             <td class="table-td">
-                <a href="{{ route('memo.edit') }}" class="edit-link">編集</a>
+                <a href="{{ route('memo.edit', $memo->id) }}" class="edit-link">編集</a>
             </td>
             <td class="table-td">
-                <form action="{{ route('memo.destroy') }}" class="delete" method="post">
+                <form action="{{ route('memo.destroy', $memo->id) }}" class="delete" method="post">
                     @method('DELETE')
                     @csrf
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="id" value="{{ $memo->id }}">
                     <button class="delete-button" type="submit">削除</button>
                 </form>
             </td>
         </tr>
+        @endforeach
     </table>
 </div>
 
