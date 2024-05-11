@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\MemoRequest;
 use App\Models\Memo;
+use App\UseCase\CreateMemoUseCase;
+use App\UseCase\DeleteMemoUseCase;
+use App\UseCase\EditMemoUseCase;
+use App\UseCase\GetEditMemoUseCase;
+use App\UseCase\GetMemoUseCase;
+use App\UseCase\GetNewMemoUseCase;
+use App\UseCase\GetOldMemoUseCase;
 
 class MemoController extends Controller
 {
@@ -13,23 +20,21 @@ class MemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function top(Request $request)
+    public function top(Request $request, GetMemoUseCase $case)
     {
-        $keyword = $request->input('keyword');
-        $query = Memo::search($keyword);
-        $memos = $query->get();
+        $memos = $case($request);
         return view('memo.top', compact('memos'));
     }
 
-    public function new(Request $request)
+    public function new(Request $request, GetNewMemoUseCase $case)
     {
-        $memos = Memo::getAllAscCreated();
+        $memos = $case($request);
         return view('memo.top', compact('memos'));
     }
 
-    public function old(Request $request)
+    public function old(Request $request, GetOldMemoUseCase $case)
     {
-        $memos = Memo::getAllDescCreated();
+        $memos = $case($request);
         return view('memo.top', compact('memos'));
     }
 
@@ -49,10 +54,9 @@ class MemoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MemoRequest $request)
+    public function store(MemoRequest $request, CreateMemoUseCase $case)
     {
-        $data = $request->validated();
-        $result = Memo::create($data);
+        $case($request);
         return redirect()->route('memo.top');
     }
 
@@ -62,9 +66,9 @@ class MemoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, GetEditMemoUseCase $case)
     {
-        $memo = Memo::find($id);
+        $memo = $case($id);
         return view('memo.edit', compact('memo'));
     }
 
@@ -75,10 +79,9 @@ class MemoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MemoRequest $request, $id)
+    public function update(MemoRequest $request, $id, EditMemoUseCase $case)
     {
-        $data = $request->validated();
-        $result = Memo::find($id)->update($data);
+        $case($request, $id);
         return redirect()->route('memo.top');
     }
 
@@ -88,9 +91,9 @@ class MemoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, DeleteMemoUseCase $case)
     {
-        $result = Memo::find($id)->delete();
+        $case($id);
         return redirect()->route('memo.top');
     }
 
