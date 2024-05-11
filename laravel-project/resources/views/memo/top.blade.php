@@ -9,9 +9,9 @@
 <div class="main">
     <!-- 検索 -->
     <div class="search">
-        <form action="" class="search-form" method="get">
+        <form action="{{ route('memo.top') }}" class="search-form" method="get">
             @csrf
-            <input type="text" name="" placeholder="Search..." class="search-form__input" value="">
+            <input type="text" name="keyword" placeholder="Search..." class="search-form__input" value="{{ request('keyword') }}">
             <button class="search-form__button" type="submit">検索</button>
         </form>
     </div>
@@ -25,11 +25,11 @@
     </div>
     <!-- ソート -->
     <div class="sort">
-        <form action="" class="sort-new" method="get">
+        <form action="{{ route('memo.new') }}" class="sort-new" method="get">
             @csrf
             <button class="sort-new__button" type="submit">新しい順</button>
         </form>
-        <form action="" class="sort-old" method="get">
+        <form action="{{ route('memo.old') }}" class="sort-old" method="get">
             @csrf
             <button class="sort-old__button" type="submit">古い順</button>
         </form>

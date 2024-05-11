@@ -13,9 +13,23 @@ class MemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function top()
+    public function top(Request $request)
     {
-        $memos = Memo::getAllOrderByCreated();
+        $keyword = $request->input('keyword');
+        $query = Memo::search($keyword);
+        $memos = $query->get();
+        return view('memo.top', compact('memos'));
+    }
+
+    public function new(Request $request)
+    {
+        $memos = Memo::getAllAscCreated();
+        return view('memo.top', compact('memos'));
+    }
+
+    public function old(Request $request)
+    {
+        $memos = Memo::getAllDescCreated();
         return view('memo.top', compact('memos'));
     }
 
