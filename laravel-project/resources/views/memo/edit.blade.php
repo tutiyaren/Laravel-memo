@@ -16,6 +16,19 @@
         @method('PUT')
         @csrf
         <div class="form-ttl">
+            <select name="name" required>
+                <option value="" disabled selected>カテゴリを選択してください</option>
+                @foreach($categories as $category)
+                @if($memo->memo_categories->contains('category_id', $category->id))
+                <option value="{{ $category->id }}" disabled selected>{{ $category->name }}</option>
+                @endif
+                @if(!($memo->memo_categories->contains('category_id', $category->id)))
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="form-ttl">
             <label for="title" class="memo-ttl">title</label>
             <input type="text" name="title" id="title" placeholder="タイトル" class="input-ttl" value="{{ $memo->title }}">
             @error('title')

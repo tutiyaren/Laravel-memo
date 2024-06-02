@@ -19,9 +19,10 @@
     <div class="ttl">
         <h1 class="ttl-top">メモ一覧</h1>
     </div>
-    <!-- メモ追加リンク -->
+    <!-- リンク -->
     <div class="link">
         <a href="{{ route('memo.create') }}" class="link-create">メモを追加</a>
+        <a href="{{ route('category.index') }}" class="link-category">カテゴリ一覧へ</a>
     </div>
     <!-- ソート -->
     <div class="sort">
@@ -38,6 +39,7 @@
     <table class="table" border="1">
         <!-- テーブルタイトル -->
         <tr class="table-tr">
+            <th class="table-th">カテゴリ名</th>
             <th class="table-th">タイトル</th>
             <th class="table-th">内容</th>
             <th class="table-th">作成日時</th>
@@ -47,6 +49,11 @@
         <!-- テーブル内容 -->
         @foreach ($memos as $memo)
         <tr class="table-tr">
+            <td class="table-td">
+                @foreach($memo->memo_categories as $memo_category)
+                {{ $memo_category->category->name }}
+                @endforeach
+            </td>
             <td class="table-td">{{ $memo->title }}</td>
             <td class="table-td">{{ $memo->content }}</td>
             <td class="table-td">{{ $memo->created_at }}</td>

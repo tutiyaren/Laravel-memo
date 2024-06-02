@@ -15,6 +15,14 @@
     <form action="{{ route('memo.store') }}" method="post" class="form">
         @csrf
         <div class="form-ttl">
+            <select name="name" required>
+                <option disabled selected value="">カテゴリを選択してください</option>
+                @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-ttl">
             <label for="title" class="memo-ttl">title</label>
             <input type="text" name="title" id="title" placeholder="タイトル" class="input-ttl" value="{{ old('title') }}">
             @error('title')
